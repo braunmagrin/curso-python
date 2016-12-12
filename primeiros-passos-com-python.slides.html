@@ -16226,10 +16226,62 @@ Fonte: <a href="https://code.tutsplus.com/tutorials/creating-a-web-app-from-scra
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Aplica&#231;&#245;es">Aplica&#231;&#245;es<a class="anchor-link" href="#Aplica&#231;&#245;es">&#182;</a></h1><h2 id="Facilitando-a-vida">Facilitando a vida<a class="anchor-link" href="#Facilitando-a-vida">&#182;</a></h2><p><a href="https://jupyterhub.bravi.com.br/user/matheus.magrin/notebooks/shared_notebooks/bravi-suite/trello2text.ipynb">Convertendo um quadro do Trello para texto (usando JSON)</a></p>
+<h1 id="Aplica&#231;&#245;es">Aplica&#231;&#245;es<a class="anchor-link" href="#Aplica&#231;&#245;es">&#182;</a></h1><h2 id="Facilitando-a-vida">Facilitando a vida<a class="anchor-link" href="#Facilitando-a-vida">&#182;</a></h2><p><strong>Cenário</strong>: Um time fez uma reunião mas nem todos puderam participar. Era necessário enviar todas as cartas criadas durante a reunião em formato texto para os que faltaram.</p>
+<center><img alt="Quadro do Trello genérico" src="images/trello-json.png" width="90%"></center>
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;retro.json&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">retro</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="n">lists_map</span> <span class="o">=</span> <span class="p">{</span><span class="n">l</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]:</span> <span class="n">l</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">retro</span><span class="p">[</span><span class="s1">&#39;lists&#39;</span><span class="p">]}</span>
+    <span class="n">cards</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;text&#39;</span><span class="p">:</span> <span class="n">card</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">],</span> <span class="s1">&#39;list&#39;</span><span class="p">:</span> <span class="n">lists_map</span><span class="p">[</span><span class="n">card</span><span class="p">[</span><span class="s1">&#39;idList&#39;</span><span class="p">]]}</span>
+             <span class="k">for</span> <span class="n">card</span> <span class="ow">in</span> <span class="n">retro</span><span class="p">[</span><span class="s1">&#39;cards&#39;</span><span class="p">]]</span>
+
+    <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">lists_map</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+        <span class="p">[</span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  &#39;</span> <span class="o">+</span> <span class="n">c</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">])</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">cards</span> <span class="k">if</span> <span class="n">c</span><span class="p">[</span><span class="s1">&#39;list&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">l</span><span class="p">]</span>
+        <span class="nb">print</span><span class="p">()</span>
+</pre></div>
 
 </div>
 </div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Não funcionou
+  Isso não foi legal
+  Isso foi muito ruim
+  Muito ruim
+  Bem mais ou menos
+
+Funcionou
+  Isso foi bom
+  Isso também
+  Essa outra coisa também foi boa
+
+Ações
+  Melhorar isso
+  Cuidar para não fazer aquilo
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
